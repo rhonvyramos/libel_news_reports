@@ -6,5 +6,3 @@
 # Use
 
 # Screencap
-
-# Googly
