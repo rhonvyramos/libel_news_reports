@@ -7,7 +7,7 @@
 
 # Screencap
 
-<<<<<<< john_branch
+
 
 # GOOGLY
 
@@ -20,5 +20,3 @@
  GIVEN A LinkedIN or Indeed profile
  WHEN I type in my basic skills
  THEN I am presented with a list of users and employers looking for job applicants 
-=======
->>>>>>> main
