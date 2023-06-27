@@ -21,22 +21,47 @@
       rel="stylesheet"
     />
 <!-- jQuery UI CSS Link-->
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 <!-- CSS Links-->    
-    <link rel="stylesheet" href="./assets/css/jass.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style_jimmy.css" />
 </head>
 
 <body>
+
+    <div>
+        <div class="search-container">
+            <input type="text" id="search-term" placeholder="Search news here...">
+            <select id="news-categories">
+                <option value="option1">All Categories</option>
+                <option value="option2">Politics</option>
+                <option value="option3">Sports</option>
+            </select>
+        </div>
+        <div class="search-container">
+            <input type="text" id="from" name="from" placeholder="From Date">
+            <input type="text" id="to" name="to" placeholder="To Date">
+            <div style="width:45px;"></div>
+            <button onclick="searchNews()">Search</button>
+        </div>
+        
+        
+
+
+    </div>
+
+      
+
+      <div id="news-results"></div>
+    
+
 <!-- This empty `<div>` will anchor the elements we create with jQuery. -->
     <div class="m-5" id="root"></div>
 <!-- jQuery Library Link-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- jQuery UI Library Link-->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!--DayJS Library Link-->
     <script
     src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
@@ -44,7 +69,7 @@
     crossorigin="anonymous">
     </script>
 <!-- Javascript Link-->
-    <script type="text/javascript" src="./assets/js/script.js"></script>
+    <script type="text/javascript" src="./assets/javascript/script_jimmy.js"></script>
 </body>
 
 </html>
