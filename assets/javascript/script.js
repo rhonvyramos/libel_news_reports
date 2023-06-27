@@ -4,3 +4,4 @@ searchButton.addEventListener("click", function(){
     console.log(textInput.value)
 } )
 
+
