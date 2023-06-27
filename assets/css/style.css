@@ -28,7 +28,6 @@
 #colortag2{
     background-color: #a9a9a9;
     color: #a9a9a9;
-    text-align: left;
     height: 5px;
 }
 
@@ -54,6 +53,7 @@
     display: inline;
     padding-left: 5%;
 }
+
 
 #footer{
     position: absolute;
