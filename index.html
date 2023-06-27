@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>News Reports & Journal</title>
+    <!-- jQuery UI CSS Link-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- CSS Links-->     
     <link rel="stylesheet" href="./assets/css/style.css">
   </head>
     
@@ -43,12 +47,39 @@
       <div class="search-container">
           <input type="text" id="from" name="from" placeholder="From Date">
           <input type="text" id="to" name="to" placeholder="To Date">
-
           <button onclick="searchNews()">Search</button>
       </div>
     </section>
-    <h2 id="h2-category">Category</h2>
-    <section id="news-widget">
+
+    <h2 id="h2-category">Category</h2> <!-- This needs to change based on news category -->
+
+    <section id="news-results">
+      <!-- NEWS RESULTS GET BUILT IN HERE -->
+      <!-- Filter results based on search criteria -->
+      <!-- Return fields for source, date, title, summary, author, category, and picture -->
+      <!-- Use JS to populate the createNewsWidget() function with the above fields-->
+    </section>
+
+    <!-- footer elements-->
+    <footer>
+        <p> ©2023 Team America Productions </p>
+    </footer>
+
+    <!-- This empty `<div>` will anchor the elements we create with jQuery. -->
+    <div class="m-5" id="root"></div>
+    <!-- jQuery Library Link-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- jQuery UI Library Link-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!-- Local JS Link-->    
+    <script type="text/javascript" src="./assets/javascript/script.js"></script>
+  </body>
+  
+</html>
+
+  <!-- 
+   <section id="news-widget">
       <div id="widget-content">
         <div id="widget-header">
           <div id="news-source">Source</div>
@@ -65,14 +96,11 @@
         <img src="./assets/images/test.png" alt="Article Image">
       </div>
     </section>
-
-    <div id="news-results"></div>
-
-    <!-- footer elements-->
-    <footer>
-        <p> ©2023 Team America Productions </p>
-    </footer>
-  <!-- 
+  -->
+  
+  
+  
+    <!-- 
     <section>
       <h1>"description":</h1>
       <ul></ul>
@@ -96,5 +124,4 @@
     .catch(error => console.log(error));
   </script>
 -->
-  </body>
-</html>
+

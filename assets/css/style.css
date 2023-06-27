@@ -54,7 +54,7 @@
 .navlink:hover {
     color:red;
     font-weight: bolder;
-    border-top:8px solid red;
+    border-top:5px solid red;
     margin-top:-23px;
 }
 
@@ -105,7 +105,7 @@
 #h2-category {
     font-size:x-large;
     margin-left: 5px;
-    border-bottom: .5px dashed grey;
+    border-bottom: .5px dashed rgba(128, 128, 128, 0.500);
     color:red;
 }
 
@@ -114,7 +114,7 @@
     width:475px;
     height:200px;
     border:1px solid lightgrey;
-    box-shadow:0 15px 15px rgba(0, 0, 0, 0.3);
+    box-shadow:5px 5px 5px rgba(47, 79, 79, 0.5);
     margin: 50px auto 0;
   }
   
@@ -196,4 +196,23 @@ footer {
 footer p {
     color: grey;
     margin:20px;
+}
+
+
+
+/* OUR TEAM PAGE */
+
+#our-team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+#developer-card {
+  display: flex;
+  width:475px;
+  height:200px;
+  border:1px solid lightgrey;
+  box-shadow:5px 5px 5px rgba(47, 79, 79, 0.5);
+  margin:40px 40px;
 }
