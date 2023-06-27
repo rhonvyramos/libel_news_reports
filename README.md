@@ -12,11 +12,11 @@
 # GOOGLY
 
 # User Story 
- AS a user looking for employment
- I WANT to input my skill set and be shown employers that are looking for candidates
- SO THAT I can maximize the effciency and accuracy that I locate and apply to jobs with
+ AS A person searching for specified information
+ I WANT an easy way to find related news articles
+ SO THAT I can easily see information that is relevant to my search
 
- # Acceptance Critera 
- GIVEN A LinkedIN or Indeed profile
- WHEN I type in my basic skills
- THEN I am presented with a list of users and employers looking for job applicants 
+ # Acceptance Criteria 
+ GIVEN I am looking for news articles
+ WHEN I input keywords relating to my topic of research
+ THEN related news articles will display on my screen
