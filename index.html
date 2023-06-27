@@ -35,8 +35,27 @@
     <section id="content_footer">
         <section id="footer_contact_info"></section>
     </section>
-
+    <section>
+      <h1>"description":</h1>
+      <ul></ul>
+     </section>
     <!-- javascript elements-->
-	<script src="./assets/javascript/script.js"></script>
+    
+  <script>
+    fetch('	https://date.nager.at/api/v2/publicholidays/2020/US')
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      data.forEach(user => {
+        const markup = `<li>${user.name}</li>`;
+
+        document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+      });
+    })
+    .catch(error => console.log(error));
+  </script>
+  
   </body>
 </html>
