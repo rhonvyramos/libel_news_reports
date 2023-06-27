@@ -1,61 +1,107 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 #colortag{
-    background-color: #a9a9a9;
-    color: #a9a9a9;
-    text-align: left;
+    background-color:darkslategrey;
+    color: darkgrey;
     height: 40px;
 }
 
 #LibelNews{
-    color: maroon;
+    color:red;
     font-size: 90px;
     position: relative;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     justify-content: center;
-    margin-top: -5px;
+    margin-top: 30px;
 }
 
-#bringyou{
+#tag-line{
     text-align: center;
-    color: grey;
-    font-size: 20px;
+    color: darkslategray;
+    font-size: 16px;
     position: relative;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
     justify-content: center;
-    margin-top: -60px;
+    margin-top: -80px;
 }
 #colortag2{
-    background-color: #a9a9a9;
-    color: #a9a9a9;
+    background-color: lightgrey;
     height: 5px;
 }
 
 .navbar{
     position: relative;
+    display:flex;
+    flex-direction: row;
     text-align: center;
-    bottom: 40%;
-    right: 50px;
-}
-#NS{
-    position: relative;
-    display: inline;
-    padding-left: 5%;
-    
-}
-#NJ{
-    position: relative;
-    display: inline;
-    padding-left: 5%;
-}
-#AU{
-    position: relative;
-    display: inline;
-    padding-left: 5%;
+    list-style-type: none;
+    justify-content: space-around;
+    font-size: 16px;
+    font-weight: bold;
 }
 
+.navlink {
+    position: relative;
+    cursor:pointer;
+    margin-top:-15px;
+    margin-bottom: 20px;
+}
 
-#footer{
+.navlink:hover {
+    color:red;
+    font-weight: bolder;
+    border-top:8px solid red;
+    margin-top:-23px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    height: 24px;
+    margin: 5px 2.5px;
+}
+
+.search-container input[type=text] {
+    padding: 10px;
+    width: 300px;
+    font-size: small;
+}
+
+#news-categories {
+    padding: 0 10px;
+    font-size: small;
+    height: 24px;
+    background-color: red;
+    color:white;
+    margin: 0 0 0 2.5px;
+    width:150px;
+}
+
+.search-container button {
+    padding: 0 20px;
+    font-size: small;
+    height: 24px;
+    background-color: darkslategray;
+    color:white;
+    margin: 0 2.5px;
+    width: 100px;
+}
+
+#from {
+    width:160px;
+    margin: 0 2.5px ;
+
+}
+
+#to {
+    width:160px;
+    margin: 0 2.5px;
+}
+
+#footer {
     position: absolute;
     bottom: 0%;
     left: 45%;
