@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News Reports & Journal</title>
+    <!-- jQuery UI CSS Link-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- CSS Links-->     
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+    
+  <!-- main content elements-->
+  <body id="container">
+
+    <!-- header elements -->
+    <header id="content_header">
+
+        <!-- title elements -->
+        <div id="header_title">
+            <div id="color-spacer"> </div>
+            <h2 id="LibelNews">Libel News</h2>
+            <p id="tag-line"> Bringing you fake new from all your favorite "unbaised" sources</p>
+            <div id="color-spacer2"> </div>
+        </div>
+    </header>
+
+    <!-- body elements-->
+    <nav id="content_main"></nav>
+    <ul class="navbar">
+      <li><a class = "navlink" href="index.html">News Search</a></li>
+      <li><a class = "navlink" href="news_journal.html">News Journal</a></li>
+      <li><a class = "navlink" href="about_us.html">About Us</a></li>
+   </ul>
+
+    <section style="margin-bottom:50px">
+      <div class="search-container">
+          <input type="text" id="search-term" placeholder="Search news here...">
+          <select id="news-categories">
+              <option value="option1">All Categories</option>
+              <option value="option2">Politics</option>
+              <option value="option3">Sports</option>
+          </select>
+      </div>
+      <div class="search-container">
+          <input type="text" id="from" name="from" placeholder="From Date">
+          <input type="text" id="to" name="to" placeholder="To Date">
+          <button onclick="searchNews()">Search</button>
+      </div>
+    </section>
+
+    <main>
+        <div id="journal-container">
+            <div id="journal-news-results">
+                <h2 id="h2-category">Category</h2> <!-- This needs to change based on news category -->
+                <section id="news-results">
+                    <!-- NEWS RESULTS GET BUILT IN HERE -->
+                    <!-- Filter results based on search criteria -->
+                    <!-- Return fields for source, date, title, summary, author, category, and picture -->
+                    <!-- Use JS to populate the createNewsWidget() function with the above fields-->
+                  </section>
+            </div>
+            <div id="journal-entry">
+                <input type="text" id="user-topic" placeholder="Topic">
+                <button onclick="saveLibel()">Save</button>
+                <input type="text" id="user-libel" placeholder="Enter your libel-laced research here...">
+            </div>
+        </div>
+    </main>
+    <div style="height:150px"></div>
+    <!--
+   
+
+    -->
+   
+    <!-- footer elements-->
+    <footer>
+        <p> ©2023 Team America Productions </p>
+    </footer>
+
+    <!-- This empty `<div>` will anchor the elements we create with jQuery. -->
+    <div class="m-5" id="root"></div>
+    <!-- jQuery Library Link-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- jQuery UI Library Link-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <!-- Local JS Link-->    
+    <script type="text/javascript" src="./assets/javascript/script.js"></script>
+  </body>
+  
+</html>
+
+  
