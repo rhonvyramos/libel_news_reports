@@ -36,6 +36,43 @@ $( function() {
     }
   } ); 
 
+  function searchNews() {
+    var searchTerm = document.getElementById('search-term').value;
+    var apiKey = '09e64df775b241588fad642e27dd95c6';
+  
+    // Make an API request with the search term
+    var url = 'https://api.newsapi.com/v2/search?q=' + searchTerm + '&apiKey=' + apiKey;
+  
+    // Use the Fetch API to make the request
+    fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        // Process the response data and display the news results
+        displayResults(data.articles);
+      })
+      .catch(function(error) {
+        console.log('Error:', error);
+      });
+  }
+  
+  function displayResults(articles) {
+    var resultsContainer = document.getElementById('news-results2');
+    resultsContainer.innerHTML = '';
+  
+    // Loop through the articles and create HTML elements to display them
+    articles.forEach(function(article) {
+      var articleElement = document.createElement('div');
+      articleElement.innerHTML = '<h2>' + article.title + '</h2>' +
+                                 '<p>' + article.description + '</p>' +
+                                 '<a href="' + article.url + '">Read more</a>';
+  
+      resultsContainer.appendChild(articleElement);
+    });
+  }
+
+// Create the news widget to feed api responses into  
 function createNewsWidget() {
     // Create the main section element
     const newsWidgetSection = document.getElementById('news-results');
