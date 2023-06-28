@@ -2,7 +2,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#colortag{
+#color-spacer{
     background-color:darkslategrey;
     color: darkgrey;
     height: 40px;
@@ -17,7 +17,7 @@
     margin-top: 30px;
 }
 
-#tag-line{
+#tag-line {
     text-align: center;
     color: darkslategray;
     font-size: 16px;
@@ -26,7 +26,8 @@
     justify-content: center;
     margin-top: -80px;
 }
-#colortag2{
+
+#color-spacer2{
     background-color: lightgrey;
     height: 5px;
 }
@@ -37,29 +38,45 @@
     flex-direction: row;
     text-align: center;
     list-style-type: none;
-    justify-content: space-around;
+    justify-content:space-evenly;
     font-size: 16px;
     font-weight: bold;
+    margin-left:-50px;
+    margin-top: 0px;
+    margin-bottom:60px;
 }
 
 .navlink {
-    position: relative;
+    text-decoration: inherit;
+    color:inherit;
     cursor:pointer;
-    margin-top:-15px;
-    margin-bottom: 20px;
+    margin: 0 px;
 }
 
 .navlink:hover {
     color:red;
     font-weight: bolder;
-    border-top:8px solid red;
-    margin-top:-23px;
+    border-top:5px solid red;
+    margin-top:-21px;
+}
+
+.navlink:active {
+  color:darkslategrey;
+  font-weight: bolder;
+  border-top:5px solid darkslategrey;
+  margin-top:-21px;
+}
+
+.navlink:focus {
+  color:red;
+  font-weight: bolder;
+  border-top:5px solid red;
+  margin-top:-21px;
 }
 
 .search-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
     height: 24px;
     margin: 5px 2.5px;
 }
@@ -93,7 +110,6 @@
 #from {
     width:160px;
     margin: 0 2.5px ;
-
 }
 
 #to {
@@ -101,9 +117,174 @@
     margin: 0 2.5px;
 }
 
-#footer {
-    position: absolute;
-    bottom: 0%;
-    left: 45%;
-    right: 45%;
+#h2-category {
+    font-size:x-large;
+    margin-left: 5px;
+    border-bottom: .5px dashed rgba(128, 128, 128, 0.500);
+    color:red;
+}
+
+#news-widget {
+    display: flex;
+    width:475px;
+    height:200px;
+    border:1px solid lightgrey;
+    box-shadow:5px 5px 5px rgba(47, 79, 79, 0.5);
+    margin: 50px auto 0;
+  }
+  
+  #article-image {
+    flex-basis: 30%;
+  }
+  
+  #article-image img {
+    max-width: 100%;
+    height: 100%;
+  }
+  
+  #widget-content {
+    flex-basis: 70%;
+    padding: 3px 8px;
+    position:relative;
+  }
+  
+  #widget-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  #news-source {
+
+  }
+  
+  #article-date {
+
+  }
+  
+  #article-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: red;
+  }
+  
+  #article-summary {
+    color:grey
+  }
+  
+  #author-category {
+    display: flex;
+    justify-content: space-between;
+    position:absolute;
+    bottom:0;
+    width:95%;
+  }
+  
+  #author {
+    font-size: small;
+  }
+  
+  #category {
+    font-size: small;
+  }
+
+#color-spacer3 {
+    background-color: red;
+    height: 5px;
+    display:flex;
+    position:fixed;
+    bottom:45px;
+    width:100%;
+}
+
+footer {
+    display:flex;
+    position:fixed;
+    width:100%;
+    background-color: antiquewhite;
+    bottom:0px;
+    border-top:6px solid red;
+    margin-left:-8px;
+}
+
+footer p {
+    color: grey;
+    margin:20px;
+}
+
+
+
+/* OUR TEAM PAGE */
+
+#our-team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+#developer-card {
+  display: flex;
+  width:475px;
+  height:200px;
+  border:1px solid lightgrey;
+  box-shadow:5px 5px 5px rgba(47, 79, 79, 0.5);
+  margin:40px 40px;
+}
+
+
+
+
+/* JOURNAL PAGE */
+
+#journal-container {
+  display:flex;
+  flex-wrap:wrap-reverse;
+  justify-content:center
+}
+
+#journal-news-results {
+  width:475px;
+  height:auto;
+  margin-right:20px;
+}
+
+#journal-entry {
+  width:475px;
+  height:650px;
+}
+
+#user-topic {
+  font-size: large;
+  font-weight: bolder;
+  width: 357px
+}
+
+#user-libel {
+  height:600px;
+  width: 98.5%;
+  margin-top:5px;
+}
+
+#user-libel::placeholder{
+  text-align: left;
+}
+
+#journal-container button {
+  padding: 0 20px;
+  font-size: small;
+  height: 28px;
+  background-color: darkslategray;
+  color:white;
+  margin: 0 2.5px;
+  width: 100px;
+}
+
+#journal-news-results h2 {
+  font-size:x-large;
+  margin-left: 5px;
+  border-bottom: .5px dashed rgba(128, 128, 128, 0.500);
+  margin-top:-1px;
+  color:red;
+  margin-bottom: -43px;
 }

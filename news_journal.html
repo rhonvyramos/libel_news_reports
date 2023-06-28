@@ -35,7 +35,7 @@
       <li><a class = "navlink" href="about_us.html">About Us</a></li>
    </ul>
 
-    <section>
+    <section style="margin-bottom:50px">
       <div class="search-container">
           <input type="text" id="search-term" placeholder="Search news here...">
           <select id="news-categories">
@@ -51,15 +51,30 @@
       </div>
     </section>
 
-    <h2 id="h2-category">Category</h2> <!-- This needs to change based on news category -->
+    <main>
+        <div id="journal-container">
+            <div id="journal-news-results">
+                <h2 id="h2-category">Category</h2> <!-- This needs to change based on news category -->
+                <section id="news-results">
+                    <!-- NEWS RESULTS GET BUILT IN HERE -->
+                    <!-- Filter results based on search criteria -->
+                    <!-- Return fields for source, date, title, summary, author, category, and picture -->
+                    <!-- Use JS to populate the createNewsWidget() function with the above fields-->
+                  </section>
+            </div>
+            <div id="journal-entry">
+                <input type="text" id="user-topic" placeholder="Topic">
+                <button onclick="saveLibel()">Save</button>
+                <input type="text" id="user-libel" placeholder="Enter your libel-laced research here...">
+            </div>
+        </div>
+    </main>
+    <div style="height:150px"></div>
+    <!--
+   
 
-    <section id="news-results">
-      <!-- NEWS RESULTS GET BUILT IN HERE -->
-      <!-- Filter results based on search criteria -->
-      <!-- Return fields for source, date, title, summary, author, category, and picture -->
-      <!-- Use JS to populate the createNewsWidget() function with the above fields-->
-    </section>
-
+    -->
+   
     <!-- footer elements-->
     <footer>
         <p> ©2023 Team America Productions </p>
@@ -78,50 +93,4 @@
   
 </html>
 
-  <!-- 
-   <section id="news-widget">
-      <div id="widget-content">
-        <div id="widget-header">
-          <div id="news-source">Source</div>
-          <div id="article-date">Date</div>
-        </div>
-        <div id="article-title">Title</div>
-        <div id="article-summary">Summary</div>
-        <div id="author-category">
-          <div id="author">Author:<span></span></div>
-          <div id="category">Category:<span></span></div>
-        </div>
-      </div>
-      <div id="article-image">
-        <img src="./assets/images/test.png" alt="Article Image">
-      </div>
-    </section>
-  -->
   
-  
-  
-    <!-- 
-    <section>
-      <h1>"description":</h1>
-      <ul></ul>
-     </section>
-    <!-- javascript elements-->
-    
-<!--
-    <script>
-    fetch('	https://date.nager.at/api/v2/publicholidays/2020/US')
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-      data.forEach(user => {
-        const markup = `<li>${user.name}</li>`;
-
-        document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
-      });
-    })
-    .catch(error => console.log(error));
-  </script>
--->
-
