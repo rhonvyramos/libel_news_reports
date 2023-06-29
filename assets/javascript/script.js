@@ -192,7 +192,21 @@ function searchNews() {
   .catch(error => console.log(error));  
 }
   
-    
+// hovering over links shows actual link url
+let news_source = $(document.getElementById("our-team-container")).find($("[id=news-source]"));
+let article_date = $(document.getElementById("our-team-container")).find($("[id=article-date]"));
+
+$(news_source).hover(function() {
+  $(this).text($(this).attr("href"));
+}, function() {
+  $(this).text("LinkedIn");
+});
+
+$(article_date).hover(function() {
+  $(this).text($(this).attr("href"));
+}, function() {
+  $(this).text("GitHub");
+});  
 
 
 
