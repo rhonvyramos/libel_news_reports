@@ -7,7 +7,6 @@
     <title>News Reports & Journal</title>
     <!-- jQuery UI CSS Link-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <!-- CSS Links-->     
     <link rel="stylesheet" href="./assets/css/style.css">
   </head>
@@ -16,40 +15,51 @@
   <body id="container">
 
     <!-- header elements -->
-    <header id="content_header">
+    <header>
 
         <!-- title elements -->
-        <div id="header_title">
-            <div id="color-spacer"> </div>
-            <h2 id="LibelNews">Libel News</h2>
+        <div id="color-spacer"> </div>
+        <div id="content-header">
+          
+          <section id="header-title">
+            <h2 id="libel-news">Libel News</h2>
             <p id="tag-line"> Bringing you fake new from all your favorite "unbaised" sources</p>
-            <div id="color-spacer2"> </div>
-        </div>
-    </header>
+          </section>
 
+          <section id="search-title">
+            <div class="search-container">
+                <input type="text" id="search-term" placeholder="Search news here...">
+                <select id="news-categories">
+                    <option value="option1">All Categories</option>
+                    <option value="option2">Arts</option>
+                    <option value="option3">Business</option>
+                    <option value="option4">Politics</option>
+                    <option value="option5">Religion</option>
+                    <option value="option6">Science</option>
+                    <option value="option7">Sports</option>
+                    <option value="option8">World</option>
+                </select>
+            </div>
+            <div class="search-container">
+                <input type="text" id="from" name="from" placeholder="From Date">
+                <input type="text" id="to" name="to" placeholder="To Date">
+                <button onclick="searchNews()">Search</button>
+            </div>
+          </section>
+          <div style="height:10px;"></div>
+        </div>
+        <div id="color-spacer2"> </div>
+       
+
+        
+    </header>
     <!-- body elements-->
-    <nav id="content_main"></nav>
+    <nav id="content-main"></nav>
     <ul class="navbar">
       <li><a class = "navlink" href="index.html">News Search</a></li>
       <li><a class = "navlink" href="news_journal.html">News Journal</a></li>
       <li><a class = "navlink" href="about_us.html">About Us</a></li>
    </ul>
-
-    <section style="margin-bottom:50px">
-      <div class="search-container">
-          <input type="text" id="search-term" placeholder="Search news here...">
-          <select id="news-categories">
-              <option value="option1">All Categories</option>
-              <option value="option2">Politics</option>
-              <option value="option3">Sports</option>
-          </select>
-      </div>
-      <div class="search-container">
-          <input type="text" id="from" name="from" placeholder="From Date">
-          <input type="text" id="to" name="to" placeholder="To Date">
-          <button onclick="searchNews()">Search</button>
-      </div>
-    </section>
 
     <main>
         <div id="journal-container">

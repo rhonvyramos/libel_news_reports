@@ -2,13 +2,24 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#content-header {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap:wrap;
+}
+
+#header-title {
+  margin:0 60px ;
+}
+
 #color-spacer{
     background-color:darkslategrey;
     color: darkgrey;
     height: 40px;
 }
 
-#LibelNews{
+#libel-news{
     color:red;
     font-size: 90px;
     position: relative;
@@ -19,7 +30,7 @@
 
 #tag-line {
     text-align: center;
-    color: darkslategray;
+    color: grey;
     font-size: 16px;
     position: relative;
     display: flex;
@@ -30,6 +41,7 @@
 #color-spacer2{
     background-color: lightgrey;
     height: 5px;
+    margin-top:20px;
 }
 
 .navbar{
@@ -72,6 +84,10 @@
   font-weight: bolder;
   border-top:5px solid red;
   margin-top:-21px;
+}
+
+#search-title {
+  margin-top:15px
 }
 
 .search-container {
@@ -252,7 +268,7 @@ footer p {
 
 #journal-entry {
   width:475px;
-  height:650px;
+  height:auto;
 }
 
 #user-topic {
