@@ -155,11 +155,12 @@
   }
   
   #news-source {
-
+    font-size: small;
+    font-weight: bolder;
   }
   
   #article-date {
-
+    font-size: small;
   }
   
   #article-title {
