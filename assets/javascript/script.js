@@ -47,19 +47,28 @@ function searchNews() {
 
   // Link search button to news filters
   var searchTerm = document.getElementById('search-term').value;
-  console.log(searchTerm)
-  // var category = document.getElementById('news-categories').value;
+  var dropdown = document.getElementById("news-categories");
+  var selectedOption2 = dropdown.value; // Get the selected option's value
+  var categorySelect;
+  if (selectedOption2 == 'All Categories') {
+    categorySelect = "";
+  } else {
+    categorySelect = 'section_name:' + selectedOption2;
+  }
+
+  console.log(searchTerm);
+  console.log(categorySelect);
+
   // var from = document.getElementById('from').value;
   // var to = document.getElementById('to').value;
   
   // Combine search criteria into a larger search function for the API call
-  // userSearch = searchTerm + '&' + category '&' dateFrom '&' dateTo
-  userSearch = searchTerm
+
 
   // Make an API request with the search term
   let apiKey = '0qKub7V4fhsw2VnnCiKqY4UL7fbeJPsg';
 
-  var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + userSearch + '&api-key=' + apiKey;
+  var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchTerm + '&fq=' + categorySelect + '&api-key=' + apiKey;
   console.log(url);
 
   // Make API request
@@ -95,15 +104,15 @@ function searchNews() {
         const author = data.response.docs[n].byline.original;
         console.log('Author:', author);
 
-        const newsResultsElement = document.getElementById('news-results2');
-        newsResultsElement.innerHTML = `
-          <h2>${mainHeadline}</h2>
-          <p>${snippet}</p>
-          <p>Source: ${source}</p>
-          <p>Date: ${date}</p>
-          <p>Category: ${category}</p>
-          <p>Author: ${author}</p>
-        `;
+        // const newsResultsElement = document.getElementById('news-results2');
+        // newsResultsElement.innerHTML = `
+        //   <h2>${mainHeadline}</h2>
+        //   <p>${snippet}</p>
+        //   <p>Source: ${source}</p>
+        //   <p>Date: ${date}</p>
+        //   <p>Category: ${category}</p>
+        //   <p>Author: ${author}</p>
+        // `;
 
         // Create the news widget to feed api responses into  
         function createNewsWidget() {
