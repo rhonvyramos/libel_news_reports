@@ -31,6 +31,20 @@ $( function() {
   } ); 
 
 function searchNews() {
+
+  // Select the dropdown element
+  var dropdown = document.getElementById("news-categories");
+
+  // Select the element where you want to display the selected option
+  var categoryElement = document.getElementById("h2-category");
+
+  // Function to update the display based on the selected option
+  function updateDisplay() {
+    var selectedOption = dropdown.value; // Get the selected option's value
+    categoryElement.textContent = selectedOption; // Update the display element with the selected option
+    console.log(selectedOption);
+  }
+
   // Link search button to news filters
   var searchTerm = document.getElementById('search-term').value;
   console.log(searchTerm)
@@ -45,12 +59,8 @@ function searchNews() {
   // Make an API request with the search term
   let apiKey = '0qKub7V4fhsw2VnnCiKqY4UL7fbeJPsg';
 
-
-
   var url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + userSearch + '&api-key=' + apiKey;
   console.log(url);
-
-
 
   // Make API request
   fetch(url)
@@ -86,14 +96,14 @@ function searchNews() {
         console.log('Author:', author);
 
         const newsResultsElement = document.getElementById('news-results2');
-        // newsResultsElement.innerHTML = `
-        //   <h2>${mainHeadline}</h2>
-        //   <p>${snippet}</p>
-        //   <p>Source: ${source}</p>
-        //   <p>Date: ${date}</p>
-        //   <p>Category: ${category}</p>
-        //   <p>Author: ${author}</p>
-        // `;
+        newsResultsElement.innerHTML = `
+          <h2>${mainHeadline}</h2>
+          <p>${snippet}</p>
+          <p>Source: ${source}</p>
+          <p>Date: ${date}</p>
+          <p>Category: ${category}</p>
+          <p>Author: ${author}</p>
+        `;
 
         // Create the news widget to feed api responses into  
         function createNewsWidget() {
@@ -187,6 +197,7 @@ function searchNews() {
 
         // Call the function to create the news widget
         createNewsWidget();
+        updateDisplay();
       }
     })
   .catch(error => console.log(error));  
