@@ -155,6 +155,13 @@
   height:200px;
 }
 
+#news-results {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-self: ;
+}
+
 #news-widget {
     display: flex;
     width:475px;
