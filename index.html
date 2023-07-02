@@ -43,7 +43,7 @@
             <div class="search-container">
                 <input type="text" id="from" name="from" placeholder="From Date">
                 <input type="text" id="to" name="to" placeholder="To Date">
-                <button onclick="searchNews()">Search</button>
+                <button id="newsSearchButton" onclick="searchNews()">Search</button>
             </div>
           </section>
           <div style="height:10px;"></div>
@@ -59,12 +59,9 @@
       <li><a class = "navlink" href="about_us.html">About Us</a></li>
     </ul>
    
-    <!-- <image id="landing-image">
-      <img src="./assets/images/fakefact.png" alt="fake-fact-blocks">
-    </image> -->
-  
-
-    
+    <div id="landing-image">
+      <img src="./assets/images/fakefact-thin.png" alt="fake-fact-blocks">
+    </div>
 
     <h2 id="h2-category">Category</h2> <!-- This needs to change based on news category -->
 
@@ -75,9 +72,10 @@
       <!-- Use JS to populate the createNewsWidget() function with the above fields-->
     </section>
 
-    <section id="news-results2">
+    <!-- <section id="news-results2"> -->
       <!-- TEST NEWS RESULTS GET BUILT IN HERE -->
-    </section>
+    <!-- </section> -->
+    
     <div style="height:500px;"></div>
     <!-- footer elements-->
     <footer>
