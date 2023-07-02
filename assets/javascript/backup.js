@@ -82,6 +82,8 @@ $( function() {
         console.log(data);
   
         for (let n=0; n<10; n++) {
+  
+  
           
           // Process the received data here
           // Access the snippet
@@ -105,7 +107,9 @@ $( function() {
           console.log('Category:', category);
   
           // Access the author
-          const author = data.response.docs[n].byline.original;
+          // const author = data.response.docs[n].byline.original;
+          const author = data.response.docs[n].byline && data.response.docs[n].byline.original ? data.response.docs[n].byline.original.replace(/^By /, '') : 'N/A';
+  
           console.log('Author:', author);
   
           // const newsResultsElement = document.getElementById('news-results2');
@@ -190,10 +194,16 @@ $( function() {
             articleImage.id = 'article-image';
   
             // Create the image element within the article image
+            // Use a try block - the multimedia might not be an array or the specific index might not be available
+            let thumbnailLgUrl;
+            try {
+              const thumbnailLgLoc = data.response.docs[n].multimedia[19].url;
+              thumbnailLgUrl = 'https://www.nytimes.com/'+thumbnailLgLoc;
+            } catch (e) {
+              console.log('Failed to access thumbnail URL:', e);
+              thumbnailLgUrl = ''; // default thumbnail URL or leave it undefined
+            } 
             const image = document.createElement('img');
-            const thumbnailLgLoc = data.response.docs[n].multimedia[19].url;
-            const thumbnailLgUrl = 'https://www.nytimes.com/'+thumbnailLgLoc;
-            console.log('Category:', category);
             image.src = thumbnailLgUrl;
             image.alt = 'Article Image';
   
@@ -211,6 +221,7 @@ $( function() {
           // Call the function to create the news widget
           createNewsWidget();
           updateDisplay();
+        
         }
       })
   .catch(error => console.log(error));  
