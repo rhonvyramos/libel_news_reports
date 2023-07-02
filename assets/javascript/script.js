@@ -32,6 +32,12 @@ $( function() {
 
 function searchNews() {
 
+  // Clear the news results container at the start of each search
+  const newsWidgetSection = document.getElementById('news-results');
+  while (newsWidgetSection.firstChild) {
+      newsWidgetSection.firstChild.remove();
+  }
+
   // Select the dropdown element
   var dropdown = document.getElementById("news-categories");
 
