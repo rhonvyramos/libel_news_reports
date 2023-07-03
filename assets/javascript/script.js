@@ -61,20 +61,22 @@ function searchNews() {
   } else {
     categorySelect = 'section_name:' + selectedOption;
   }
-
+  const fromEl = document.getElementById('from').value;
+  const toEl = document.getElementById('to').value;
+  let from = dayjs(fromEl).format('YYYYMMDD');
+  let to = dayjs(toEl).format('YYYYMMDD');
+  
   console.log(searchTerm);
   console.log(categorySelect);
+  console.log(from);
+  console.log(to);
 
-  // var from = document.getElementById('from').value;
-  // var to = document.getElementById('to').value;
-
-  // Combine search criteria into a larger search function for the API call
 
 
   // Make an API request with the search term
   let apiKey = '0qKub7V4fhsw2VnnCiKqY4UL7fbeJPsg';
 
-  var urlSearch = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchTerm + '&fq=' + categorySelect + '&api-key=' + apiKey;
+  var urlSearch = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + searchTerm + '&fq=' + categorySelect + '&begin_date=' + from + '&end_date=' + to + '&api-key=' + apiKey;
   console.log(urlSearch);
 
   // Make API request
