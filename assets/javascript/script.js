@@ -32,20 +32,20 @@ $( function() {
 
 var doc;
 
-function defaultNews() {
+function todaysNews() {
   // Function to update the display for top news
   var categoryElement = document.getElementById("h2-category");
   function updateDisplay() {
-    categoryElement.textContent = 'Top News This Week'; // Update the display element with the selected option
+    categoryElement.textContent = 'Top News Today'; // Update the display element with the selected option
   }
 
   // Make an API request with the search term
   let apiKey = '0qKub7V4fhsw2VnnCiKqY4UL7fbeJPsg';
-  var urlDefault = 'https://api.nytimes.com/svc/mostpopular/v2/viewed/7.json?api-key=' + apiKey;
-  console.log(urlDefault);
+  var urlTodaysNews = 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=' + apiKey;
+  console.log(urlTodaysNews);
 
   // Make API request
-  fetch(urlDefault)
+  fetch(urlTodaysNews)
     .then(response => response.json())
     .then(data => {
       console.log(data);
@@ -59,10 +59,59 @@ function defaultNews() {
     .catch(error => console.log(error));
 }
 
-// Call searchNews() on page load with the default URL
-$(document).ready(function() {
-  defaultNews();
-});
+function topNews7() {
+  // Function to update the display for top news
+  var categoryElement = document.getElementById("h2-category");
+  function updateDisplay() {
+    categoryElement.textContent = 'Trending News from this Week'; // Update the display element with the selected option
+  }
+
+  // Make an API request with the search term
+  let apiKey = '0qKub7V4fhsw2VnnCiKqY4UL7fbeJPsg';
+  var urlTopNews7 = 'https://api.nytimes.com/svc/mostpopular/v2/viewed/7.json?api-key=' + apiKey;
+  console.log(urlTopNews7);
+
+  // Make API request
+  fetch(urlTopNews7)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      for (let n=0; n<20; n++) {
+        doc = data.results[n];
+        populateArticles();
+        updateDisplay();
+      }
+    })
+    .catch(error => console.log(error));
+}
+
+function topNews30() {
+  // Function to update the display for top news
+  var categoryElement = document.getElementById("h2-category");
+  function updateDisplay() {
+    categoryElement.textContent = 'Trending News from this Month'; // Update the display element with the selected option
+  }
+
+  // Make an API request with the search term
+  let apiKey = '0qKub7V4fhsw2VnnCiKqY4UL7fbeJPsg';
+  var urlTopNews30 = 'https://api.nytimes.com/svc/mostpopular/v2/viewed/30.json?api-key=' + apiKey;
+  console.log(urlTopNews30);
+
+  // Make API request
+  fetch(urlTopNews30)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      for (let n=0; n<20; n++) {
+        doc = data.results[n];
+        populateArticles();
+        updateDisplay();
+      }
+    })
+    .catch(error => console.log(error));
+}
 
 function populateArticles() {
   // Access the snippet
@@ -112,6 +161,11 @@ function populateArticles() {
   author = doc.byline && doc.byline.original ? doc.byline.original.replace(/^By /, '') : 'N/A';
   console.log('Author:', author);
 
+  // Access the URL
+  let url;
+  url = doc.url
+  console.log('url:', url)
+
   // Create the news widget to feed api responses into  
   function createNewsWidget() {
     // Create the main section element
@@ -146,9 +200,11 @@ function populateArticles() {
     widgetHeader.appendChild(articleDate);
 
     // Create article title
-    const articleTitle = document.createElement('div');
+    const articleTitle = document.createElement('a');
     articleTitle.id = 'article-title';
     articleTitle.textContent = title;
+    articleTitle.href = url;
+    articleTitle.target = "_blank"; // this opens the article up in a new page
 
     // Create article summary
     const articleSummary = document.createElement('div');
@@ -183,20 +239,6 @@ function populateArticles() {
     const articleImage = document.createElement('div');
     articleImage.id = 'article-image';
 
-    // Create the image element within the article image
-    // let thumbnailUrl;
-    // try {
-    //   thumbnailUrl = doc.media[0]['media-metadata'][0].url;
-    //   console.log("Thumbnail: " + thumbnailUrl);
-    // } catch (e) {
-    //   console.log('Failed to access thumbnail URL:', e);
-    //   thumbnailUrl = './assets/images/monkey-selfie.jpg'; // default thumbnail URL or leave it undefined
-    // } 
-    // const image = document.createElement('img');
-    // image.src = thumbnailUrl;
-    // image.alt = 'Missing Image';
-    // console.log(thumbnailUrl);
-
     let thumbnailUrl;
     try {
         thumbnailUrl = doc.media[0]['media-metadata'][2].url;
@@ -209,9 +251,19 @@ function populateArticles() {
             thumbnailUrl = 'https://www.nytimes.com/'+doc.multimedia[19].url;
         } catch (e) {
             console.log('Failed to access thumbnail URL from multimedia:', e);
+            thumbnailUrl = undefined; // setting it to undefined for the next try block
+        }
+    }
+    if (!thumbnailUrl) {
+        try {
+            thumbnailUrl = doc.multimedia[3].url;
+        } catch (e) {
+            console.log('Failed to access thumbnail URL from multimedia:', e);
             thumbnailUrl = './assets/images/monkey-selfie.jpg'; // default thumbnail URL
         }
     }
+
+
 
     const image = document.createElement('img');
     image.src = thumbnailUrl;

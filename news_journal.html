@@ -56,7 +56,8 @@
     <!-- body elements-->
     <nav id="content-main"></nav>
     <ul class="navbar">
-      <li><a class = "navlink" href="index.html">News Search</a></li>
+      <li><a class = "navlink" href="index.html">Today's News</a></li>
+      <li><a class = "navlink" href="trending.html">Week Trending</a></li>
       <li><a class = "navlink" href="news_journal.html">News Journal</a></li>
       <li><a class = "navlink" href="about_us.html">About Us</a></li>
    </ul>
@@ -80,11 +81,7 @@
         </div>
     </main>
     <div style="height:150px"></div>
-    <!--
-   
 
-    -->
-   
     <!-- footer elements-->
     <footer>
         <p> ©2023 Team America Productions </p>
@@ -97,8 +94,19 @@
     <!-- jQuery UI Library Link-->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <!-- Local JS Link-->    
+     <!--DayJS Library Link-->
+     <script
+     src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+     crossorigin="anonymous">
+     </script>
+     <!-- Local JS Link-->    
     <script type="text/javascript" src="./assets/javascript/script.js"></script>
+    <script>
+      $(document).ready(function() {
+        topNews30();
+      });
+    </script>
   </body>
   
 </html>
