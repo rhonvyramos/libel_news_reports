@@ -358,7 +358,7 @@ function populateArticles() {
 
     let thumbnailUrl;
 
-    try {
+    /*try {
         thumbnailUrl = doc.urlToImage;
     } catch (e) {
         console.log('Failed to access thumbnail URL from media:', e);
@@ -382,7 +382,7 @@ function populateArticles() {
             thumbnailUrl = undefined; 
         }
     }
-    
+  
     if (!thumbnailUrl) {
       try {
           thumbnailUrl = doc.multimedia[3].url;
@@ -390,7 +390,31 @@ function populateArticles() {
           console.log('Failed to access thumbnail URL from multimedia:', e);
           thumbnailUrl = './assets/images/monkey-selfie.jpg'; // default thumbnail URL
       }
-  }
+  }*/
+
+      // retrieves a thumbnail
+    if(getSafe(() => doc.urlToImage) == undefined 
+      && getSafe(() => 'https://www.nytimes.com/' + doc.multimedia[19]) == undefined 
+      && getSafe(() => doc.multimedia[3]) == undefined
+      && getSafe(() => doc.media[0]['media-metadata'][2].url) == undefined) {
+        thumbnailUrl = './assets/images/monkey-selfie.jpg';
+    } else {
+      if(getSafe(() => doc.urlToImage) != undefined) {
+        thumbnailUrl = doc.urlToImage;
+      }
+
+      if(getSafe(() => doc.multimedia[3]) != undefined) {
+        thumbnailUrl = doc.multimedia[3].url;
+      }
+
+      if(getSafe(() => 'https://www.nytimes.com/' + doc.multimedia[19]) != undefined) {
+        thumbnailUrl = 'https://www.nytimes.com/' + doc.multimedia[19].url;
+      }
+
+      if(getSafe(() => doc.media[0]['media-metadata'][2].url) != undefined) {
+        thumbnailUrl = doc.media[0]['media-metadata'][2].url;
+      }
+    }
 
     const image = document.createElement('img');
     image.src = thumbnailUrl;
