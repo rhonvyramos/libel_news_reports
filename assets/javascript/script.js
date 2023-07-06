@@ -168,17 +168,17 @@ function populateArticles() {
   let summary;
   if (doc.abstract) {
     summary = doc.abstract;
-    if(doc.title.length > 70 || doc.abstract.length > 150) {
-      summary = doc.abstract.substring(0, 100) + " ...(read more).";
-    };
-  };
+  } else if (doc.summary){
+    summary = doc.snippet;
+  } else {
+    summary = doc.description;
+  }
 
-  /*
   if (summary) {
     console.log('Summary:', summary.substring(0,50)+'...');
   } else {
     console.log('Summary undefined');
-  }*/
+  }
   
   // Access the source
   let source;
