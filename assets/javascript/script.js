@@ -171,7 +171,8 @@ function populateArticles() {
   console.log('Title:', title);*/
 
   // sets title as doc.title or headline
-  if(getSafe(() => doc.title) == undefined && getSafe(() => doc.headline) == undefined) {
+  if(getSafe(() => doc.title) == undefined 
+  && getSafe(() => doc.headline) == undefined) {
     title = "No title found";
   } else {
     if(getSafe(() => doc.title) != undefined) {
@@ -188,24 +189,26 @@ function populateArticles() {
   // Access the summary
   let summary;
 
-  if (getSafe(() => doc.abstract) == undefined && getSafe(() => doc.snippet) == undefined && getSafe(() => doc.description) == undefined) {
+  if (getSafe(() => doc.abstract) == undefined 
+  && getSafe(() => doc.snippet) == undefined 
+  && getSafe(() => doc.description) == undefined) {
     summary = "No abstract found";
   } else {
-    if(doc.abstract) {
+    if(getSafe(() => doc.abstract) != undefined) {
       summary = doc.abstract;
       if(title.length > 70 || summary > 150) {
         summary = doc.abstract.substring(0, 100) + " ...";
       };
     }
 
-    if(doc.snippet) {
+    if(getSafe(() => doc.snippet) != undefined) {
       summary = doc.snippet;
       if(title.length > 70 || summary > 150) {
         summary = doc.snippet.substring(0, 100) + " ...";
       };
     }
 
-    if(doc.description) {
+    if(getSafe(() => doc.description) != undefined) {
       summary = doc.description;
       if(doc.title.length > 70 || doc.description.length > 150) {
         summary = doc.description.substring(0, 100) + " ...";
@@ -215,29 +218,32 @@ function populateArticles() {
   
   // Access the source
   let source;
-  if(getSafe(() => doc.source) == undefined && getSafe(() => doc.source.name) == undefined) {
+  if(getSafe(() => doc.source) == undefined 
+  && getSafe(() => doc.source.name) == undefined) {
     source = "No source found";
   } else {
-    if(doc.source) {
+    if(getSafe(() => doc.source) != undefined) {
       source = doc.source;
     }
-    if(doc.source.name) {
+    if(getSafe(() => doc.source.name) != undefined) {
       source = doc.source.name;
     }
   }
 
   // Access the date
   let date;
-  if(getSafe(() => doc.published_date) == undefined && getSafe(() => doc.pub_date) == undefined && getSafe(() => doc.publishedAt) == undefined) {
+  if(getSafe(() => doc.published_date) == undefined 
+  && getSafe(() => doc.pub_date) == undefined 
+  && getSafe(() => doc.publishedAt) == undefined) {
     date = "Date not found";
   } else {
-    if(doc.published_date) {
+    if(getSafe(() => doc.published_date) != undefined) {
       date = dayjs(doc.published_date).format('MMM D, YYYY');
     }
-    if(doc.pub_date) {
+    if(getSafe(() => doc.pub_date) != undefined) {
       date = dayjs(doc.pub_date).format('MMM D, YYYY');
     }
-    if(doc.publishedAt) {
+    if(getSafe(() => doc.publishedAt) != undefined) {
       date = dayjs(doc.publishedAt).format('MMM D, YYYY');
     }
   }
@@ -247,10 +253,10 @@ function populateArticles() {
   if(getSafe(() => doc.section) == undefined) {
     category = "N/A";
   } else {
-    if(doc.section) {
+    if(getSafe(() => doc.section) != undefined) {
       category = doc.section;
     }
-    if(doc.section.name) {
+    if(getSafe(() => doc.section.name) != undefined) {
       category = doc.section.name;
     }
   }
@@ -263,25 +269,33 @@ function populateArticles() {
     doc.byline.original.replace(/^By /, '');
   }*/
 
-  if(getSafe(() => doc.author) == undefined && getSafe(() => doc.byline) == undefined && getSafe(() => doc.byline.original) == undefined) {
+  if(getSafe(() => doc.author) == undefined 
+  && getSafe(() => doc.byline) == undefined 
+  && getSafe(() => doc.byline.original) == undefined) {
     author = "N/A";
   } else {
-    if(doc.author) {
+    if(getSafe(() => doc.author) != undefined) {
       author = doc.author;
     }
 
-    if(doc.byline) {
+    if(getSafe(() => doc.byline) != undefined) {
       author = doc.byline;
     }
 
-    if(doc.byline.original) {
+    if(getSafe(() => doc.byline.original) != undefined) {
       author = doc.byline.original;
     }
   }
 
   // Access the URL
   let url;
-  url = doc.url
+
+  if(getSafe(() => doc.url) == undefined) {
+    console.log("No url found")
+    return;
+  } else {
+    url = doc.url;
+  }
   
   // Create the news widget to feed api responses into  
   function createNewsWidget() {
@@ -403,11 +417,11 @@ function populateArticles() {
         thumbnailUrl = doc.urlToImage;
       }
 
-      if(getSafe(() => doc.multimedia[3]) != undefined) {
+      if(getSafe(() => doc.multimedia[3].url) != undefined) {
         thumbnailUrl = doc.multimedia[3].url;
       }
 
-      if(getSafe(() => 'https://www.nytimes.com/' + doc.multimedia[19]) != undefined) {
+      if(getSafe(() => 'https://www.nytimes.com/' + doc.multimedia[19].url) != undefined) {
         thumbnailUrl = 'https://www.nytimes.com/' + doc.multimedia[19].url;
       }
 
