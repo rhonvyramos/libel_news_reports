@@ -182,6 +182,13 @@ function searchNewsapi() {
 
   // Link search button to news filters
   var searchTerm = document.getElementById('search-term').value;
+  if (!searchTerm || searchTerm === null || searchTerm.trim() === "") {
+    searchTerm = 'pokemon';
+    alert("NewsAPI requires the search field to be filled out. The \"All Categories\" selection queries from NewsAPI and thusly must contain a search term. If you wish to search without a search term, please select one of the specific categories. We have provided you with a Pokemon search in the meantime.");
+  } else {
+    searchTerm = document.getElementById('search-term').value;
+  }
+
   var dropdown = document.getElementById("news-categories");
   var selectedOption = dropdown.value; // Get the selected option's value
   var categorySelect;
