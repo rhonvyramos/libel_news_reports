@@ -155,73 +155,133 @@ function populateArticles() {
 
   // Access the main headline
   let title;
-  if (doc.title) {
+  /*if(doc.title == null || doc.headline.main == null) {
+    console.log("missing title dumbass");
+    title = "aint got no title";
+    return;
+  };*/
+
+  /*if (doc.title) {
     title = doc.title;
   } else if (doc.headline.main) {
     title = doc.headline.main;
   } else {
     title = 'Missing Title'
   }
-  console.log('Title:', title);
+  console.log('Title:', title);*/
+
+  // sets title as doc.title or headline
+  if(getSafe(() => doc.title) == undefined && getSafe(() => doc.headline) == undefined) {
+    title = "No title found";
+  } else {
+    if(getSafe(() => doc.title) != undefined) {
+      title = doc.title;
+    }
+  
+    if(getSafe(() => doc.headline) != undefined) {
+      title = doc.headline.main;
+    }
+  }
+
+
 
   // Access the summary
   let summary;
-  if (doc.abstract) {
-    summary = doc.abstract;
-  } else if (doc.summary){
-    summary = doc.snippet;
-  } else {
-    summary = doc.description;
-  }
 
-  if (summary) {
-    console.log('Summary:', summary.substring(0,50)+'...');
+  if (getSafe(() => doc.abstract) == undefined && getSafe(() => doc.snippet) == undefined && getSafe(() => doc.description) == undefined) {
+    summary = "No abstract found";
   } else {
-    console.log('Summary undefined');
-  }
+    if(doc.abstract) {
+      summary = doc.abstract;
+      if(title.length > 70 || summary > 150) {
+        summary = doc.abstract.substring(0, 100) + " ...";
+      };
+    }
+
+    if(doc.snippet) {
+      summary = doc.snippet;
+      if(title.length > 70 || summary > 150) {
+        summary = doc.snippet.substring(0, 100) + " ...";
+      };
+    }
+
+    if(doc.description) {
+      summary = doc.description;
+      if(doc.title.length > 70 || doc.description.length > 150) {
+        summary = doc.description.substring(0, 100) + " ...";
+      };
+    }
+  };
   
   // Access the source
   let source;
-  if (doc.source.name) {
-    source = doc.source.name;
+  if(getSafe(() => doc.source) == undefined && getSafe(() => doc.source.name) == undefined) {
+    source = "No source found";
   } else {
-    source = doc.source;
+    if(doc.source) {
+      source = doc.source;
+    }
+    if(doc.source.name) {
+      source = doc.source.name;
+    }
   }
-  console.log('Source:', source);
 
   // Access the date
   let date;
-  if (doc.published_date) {
-    date = dayjs(doc.published_date).format('MMM D, YYYY');
-  } else if (doc.pub_date) {
-    date = dayjs(doc.pub_date).format('MMM D, YYYY');
+  if(getSafe(() => doc.published_date) == undefined && getSafe(() => doc.pub_date) == undefined && getSafe(() => doc.publishedAt) == undefined) {
+    date = "Date not found";
   } else {
-    date = dayjs(doc.publishedAt).format('MMM D, YYYY');
+    if(doc.published_date) {
+      date = dayjs(doc.published_date).format('MMM D, YYYY');
+    }
+    if(doc.pub_date) {
+      date = dayjs(doc.pub_date).format('MMM D, YYYY');
+    }
+    if(doc.publishedAt) {
+      date = dayjs(doc.publishedAt).format('MMM D, YYYY');
+    }
   }
-  console.log('Date:', date);
 
   // Access the category
   let category;
-  if (doc.section) {
-    category = doc.section
-  } else { 
-    category = doc.section_name;
+  if(getSafe(() => doc.section) == undefined) {
+    category = "N/A";
+  } else {
+    if(doc.section) {
+      category = doc.section;
+    }
+    if(doc.section.name) {
+      category = doc.section.name;
+    }
   }
-  console.log('Category:', category);
 
   // Access the author
-  let author = 'N/A';
-  if (doc.author) {
+  let author;
+  /*if (doc.author) {
     author = doc.author;
   } else if (doc.byline && doc.byline.original) {
     doc.byline.original.replace(/^By /, '');
+  }*/
+
+  if(getSafe(() => doc.author) == undefined && getSafe(() => doc.byline) == undefined && getSafe(() => doc.byline.original) == undefined) {
+    author = "N/A";
+  } else {
+    if(doc.author) {
+      author = doc.author;
+    }
+
+    if(doc.byline) {
+      author = doc.byline;
+    }
+
+    if(doc.byline.original) {
+      author = doc.byline.original;
+    }
   }
-  console.log('Author:', author);
 
   // Access the URL
   let url;
   url = doc.url
-  console.log('url:', url)
   
   // Create the news widget to feed api responses into  
   function createNewsWidget() {
@@ -335,7 +395,6 @@ function populateArticles() {
     const image = document.createElement('img');
     image.src = thumbnailUrl;
     image.alt = 'Missing Image';
-    console.log(thumbnailUrl)
 
     // Append image to article image
     articleImage.appendChild(image);
@@ -426,6 +485,16 @@ function searchNews() {
     })
   .catch(error => console.log(error));  
 }
+
+
+// try catch helper function catches undefined attributes from results
+function getSafe(fn, defaultVal) {
+  try {
+    return fn();
+  } catch (e) {
+    return defaultVal;
+  }
+};
 
 // hovering over links shows actual link url
 let news_source = $(document.getElementById("our-team-container")).find($("[id=news-source]"));
