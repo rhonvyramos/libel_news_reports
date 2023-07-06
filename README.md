@@ -10,29 +10,29 @@ This website is intended for  quick and effcient searching of news articles as w
 
 # Screencap
 ## Upon loading into the site the user will see this screen
-![] (./assets/rmeimgs/Proj1.png)
+![](./assets/rmeimgs/Proj1.png)
 
 ## The user can scroll down and will presented with the days top articles
-![] (./assets/rmeimgs/Proj2.png)
+![](./assets/rmeimgs/Proj2.png)
 
 ## The user will have the ability to input search criteria and can filter it by date and subject
-![] (./assets/rmeimgs/Proj3.png)
+![](./assets/rmeimgs/Proj3.png)
 
 ## Upon inputting their criteria and clicking search the user will only be shown articles that have the keyword and are of the proper subject
-![] (./assets/rmeimgs/Proj4.png)
+![](./assets/rmeimgs/Proj4.png) 
 
 ## If no result is found the user will be shown a messgae declaring no results are found for that specifc subjectr within the selected date range
-![] (./assets/rmeimgs/Proj9.png)
+![](./assets/rmeimgs/Proj9.png)
 
 ## Upon selecting the "Trending This Week" category the user will be able to see top news stories from this week
-![] (./assets/rmeimgs/Proj5.png)
+![](./assets/rmeimgs/Proj5.png)
 
 ## By clicking the "News Journal" tab the user will be able to view articles while additionally having the ability to write notes regarding what they were reading
-![] (./assets/rmeimgs/Proj6.png)
+![](./assets/rmeimgs/Proj6.png)
 
 ## The final section is an "About Us" it details the mission of our website and additionally gives a brief bio of the team members
-![] (./assets/rmeimgs/Proj7.png)
-![] (./assets/rmeimgs/Proj8.png)
+![](./assets/rmeimgs/Proj7.png)
+![](./assets/rmeimgs/Proj8.png)
 
 
 
