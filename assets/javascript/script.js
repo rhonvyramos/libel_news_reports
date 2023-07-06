@@ -35,6 +35,19 @@ $( function() {
 var doc;
 let pageNumber = 0;
 
+let apiSelector = document.getElementById('newsSearchButton')
+apiSelector.addEventListener('click', function() {
+  let dropdown = document.getElementById("news-categories");
+  let selectedOption = dropdown.value; // Get the selected option's value
+  
+  if (selectedOption === 'All Categories') {
+    searchNewsapi();
+  } else if (selectedOption != 'All Categories') {
+    searchNews();
+  } 
+});
+
+
 // Make an API call for today's news
 function todaysNews() {
   // Function to update the display for top news
@@ -149,6 +162,84 @@ function newsapi() {
   .catch(error => console.log(error));
 }
 
+// Search news using search filters
+function searchNewsapi() {
+
+  // Clear the news results container at the start of each search
+  const newsWidgetSection = document.getElementById('news-results');
+  while (newsWidgetSection.firstChild) {
+      newsWidgetSection.firstChild.remove();
+  }
+
+  // Function to update the display based on the selected option
+  var dropdown = document.getElementById("news-categories");
+  var categoryElement = document.getElementById("h2-category");
+  function updateDisplay() {
+    var selectedOption = dropdown.value; // Get the selected option's value
+    categoryElement.textContent = selectedOption; // Update the display element with the selected option
+    console.log(selectedOption);
+  }
+
+  // Link search button to news filters
+  var searchTerm = document.getElementById('search-term').value;
+  var dropdown = document.getElementById("news-categories");
+  var selectedOption = dropdown.value; // Get the selected option's value
+  var categorySelect;
+  if (selectedOption == 'All Categories') {
+    categorySelect = "general";
+  } else {
+    categorySelect = 'section_name:' + selectedOption;
+  }
+  const fromEl = document.getElementById('from').value;
+  const toEl = document.getElementById('to').value;
+  
+  let from; //= dayjs(fromEl).format('YYYYMMDD');
+  let to; //= dayjs(toEl).format('YYYYMMDD');
+  if (fromEl == "") {
+    from = dayjs().subtract(30,'day').format('YYYY-MM-DD');
+  } else {
+    from = dayjs(fromEl).format('YYYY-MM-DD');
+  }
+  if (toEl == "") {
+    to = dayjs().format('YYYY-MM-DD');
+  } else {
+    to = dayjs(fromEl).format('YYYY-MM-DD');
+  }
+
+  console.log(searchTerm);
+  console.log(categorySelect);
+  console.log(from);
+  console.log(to);
+
+  // Make an API request with the search term
+  let apiKey = '09e64df775b241588fad642e27dd95c6';
+  const sortBy = 'publishedAt';
+  const category = selectedOption;
+
+  const urlsearchNewsapi = 'https://newsapi.org/v2/everything?q='+searchTerm+'&sortBy='+sortBy+'&from='+from+'&to='+to+'&apiKey='+apiKey;
+  console.log(urlsearchNewsapi);
+
+  // Make API request
+  fetch(urlsearchNewsapi)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      noResults = document.getElementById('no-results')
+      if (data.totalResults == 0) {
+        noResults.textContent = 'No results were found for "' + searchTerm + '" within "' + selectedOption + '" from ' + from + ' to ' + to
+        categoryElement.textContent = "No Results Found"
+      } else {
+        for (let n=0; n<100; n++) {
+          doc = data.articles[n];
+          populateArticles()
+          updateDisplay();
+        }
+      }
+    })
+  .catch(error => console.log(error));  
+}
+
 
 // Build widgets and populate API pulled articles onto the site
 function populateArticles() {
@@ -210,13 +301,39 @@ function populateArticles() {
   console.log('Category:', category);
 
   // Access the author
-  let author = 'N/A';
-  if (doc.author) {
+  let author;
+  // if (doc.author) {
+  //   author = doc.author;
+  // } else if (doc.byline.original) {
+  //   author = doc.byline.original.replace(/^By /, '');
+  // } else {
+  //   author =  doc.byline.replace(/^By /, '');
+  // }
+
+  try {
     author = doc.author;
-  } else if (doc.byline && doc.byline.original) {
-    doc.byline.original.replace(/^By /, '');
-  }
-  console.log('Author:', author);
+} catch (e) {
+    console.log('Failed to access author:', e);
+    author = undefined;  
+}
+
+if (!author) {
+    try {
+        author = doc.byline.original.replace(/^By /, '');
+    } catch (e) {
+        console.log('Failed to access author:', e);
+        author = undefined; 
+    }
+}
+
+if (!author) {
+    try {
+      author =  doc.byline.replace(/^By /, '')
+    } catch (e) {
+        console.log('Failed to access author:', e);
+        author = 'unk'; 
+    }
+}
 
   // Access the URL
   let url;
