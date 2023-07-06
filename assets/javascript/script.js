@@ -157,10 +157,12 @@ function populateArticles() {
   let title;
   if (doc.title) {
     title = doc.title;
-  } else {
+  } else if (doc.headline.main) {
     title = doc.headline.main;
+  } else {
+    title = 'Missing Title'
   }
-  console.log('Title:', title.substring(0,50));
+  console.log('Title:', title);
 
   // Access the summary
   let summary;
@@ -192,7 +194,7 @@ function populateArticles() {
   if (doc.published_date) {
     date = dayjs(doc.published_date).format('MMM D, YYYY');
   } else if (doc.pub_date) {
-    date = dayjs(doc.publishedAt).format('MMM D, YYYY');
+    date = dayjs(doc.pub_date).format('MMM D, YYYY');
   } else {
     date = dayjs(doc.publishedAt).format('MMM D, YYYY');
   }
@@ -208,11 +210,11 @@ function populateArticles() {
   console.log('Category:', category);
 
   // Access the author
-  let author;
+  let author = 'N/A';
   if (doc.author) {
     author = doc.author;
-  } else {
-  author = doc.byline && doc.byline.original ? doc.byline.original.replace(/^By /, '') : 'N/A';
+  } else if (doc.byline && doc.byline.original) {
+    doc.byline.original.replace(/^By /, '');
   }
   console.log('Author:', author);
 
@@ -274,6 +276,7 @@ function populateArticles() {
     authorName.id = 'author';
     authorName.innerHTML = '<b>Author:</b> ' + author.replace(/^By /, '');
 
+    // Mark this down!!!!
     // Create category element within author and category section
     const categoryName = document.createElement('div');
     categoryName.id = 'category';
@@ -294,37 +297,40 @@ function populateArticles() {
     articleImage.id = 'article-image';
 
     let thumbnailUrl;
-    
+
     try {
         thumbnailUrl = doc.urlToImage;
     } catch (e) {
-        // console.log('Failed to access thumbnail URL from media:', e);
-        thumbnailUrl = undefined;  // setting it to undefined for the next try block
+        console.log('Failed to access thumbnail URL from media:', e);
+        thumbnailUrl = undefined;  
     }
+
     if (!thumbnailUrl) {
         try {
-            thumbnailUrl = 'https://www.nytimes.com/'+doc.multimedia[19].url;
+            thumbnailUrl = 'https://www.nytimes.com/' + doc.multimedia[19].url;
         } catch (e) {
-            // console.log('Failed to access thumbnail URL from multimedia:', e);
-            thumbnailUrl = undefined; // setting it to undefined for the next try block
+            console.log('Failed to access thumbnail URL from multimedia:', e);
+            thumbnailUrl = undefined;
         }
     }
+
     if (!thumbnailUrl) {
         try {
-            thumbnailUrl = doc.multimedia[3].url;
+            thumbnailUrl = doc.media[0]['media-metadata'][2].url; // NYT daily
         } catch (e) {
-            // console.log('Failed to access thumbnail URL from multimedia:', e);
-            thumbnailUrl = './assets/images/monkey-selfie.jpg'; // default thumbnail URL
+            console.log('Failed to access thumbnail URL from media:', e);
+            thumbnailUrl = undefined; 
         }
     }
+    
     if (!thumbnailUrl) {
-        try {
-            thumbnailUrl = doc.media[0]['media-metadata'][2].url;
-        } catch (e) {
-            // console.log('Failed to access thumbnail URL from media:', e);
-            thumbnailUrl = undefined;  // setting it to undefined for the next try block
-        }
-    }
+      try {
+          thumbnailUrl = doc.multimedia[3].url;
+      } catch (e) {
+          console.log('Failed to access thumbnail URL from multimedia:', e);
+          thumbnailUrl = './assets/images/monkey-selfie.jpg'; // default thumbnail URL
+      }
+  }
 
     const image = document.createElement('img');
     image.src = thumbnailUrl;
@@ -405,10 +411,17 @@ function searchNews() {
     .then(data => {
       console.log(data);
 
-      for (let n=0; n<10; n++) {
-        doc = data.response.docs[n];
-        populateArticles()
-        updateDisplay();
+
+      noResults = document.getElementById('no-results')
+      if (data.response.meta.hits == 0) {
+        noResults.textContent = 'No results were found for "' + searchTerm + '" within "' + selectedOption + '" from ' + from + ' to ' + to
+        categoryElement.textContent = "No Results Found"
+      } else {
+        for (let n=0; n<10; n++) {
+          doc = data.response.docs[n];
+          populateArticles()
+          updateDisplay();
+        }
       }
     })
   .catch(error => console.log(error));  
