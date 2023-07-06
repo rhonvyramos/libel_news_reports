@@ -327,3 +327,10 @@ footer p {
   color:red;
   margin-bottom: -43px;
 }
+
+#no-results{
+  margin-top: 25px;
+font-size:x-large;
+text-align: center;
+color: lightgray;
+}
