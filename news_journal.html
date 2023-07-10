@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>News Reports & Journal</title>
+    <!-- Cloudflare Link-->    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- jQuery UI CSS Link-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- CSS Links-->     
@@ -43,7 +45,7 @@
             <div class="search-container">
                 <input type="text" id="from" name="from" placeholder="From Date">
                 <input type="text" id="to" name="to" placeholder="To Date">
-                <button onclick="searchNews()">Search</button>
+                <button id="newsSearchButton">Search</button>
             </div>
           </section>
           <div style="height:10px;"></div>
@@ -63,6 +65,12 @@
       <li><a class = "navlink" href="about_us.html">About Us</a></li>
    </ul>
 
+   <div id="myModal" class="modal">
+    <div class="modal-content">
+      <p id="modal-message"></p>
+    </div>
+  </div>
+
     <main>
         <div id="journal-container">
             <div id="journal-news-results">
@@ -72,12 +80,17 @@
                     <!-- Filter results based on search criteria -->
                     <!-- Return fields for source, date, title, summary, author, category, and picture -->
                     <!-- Use JS to populate the createNewsWidget() function with the above fields-->
-                  </section>
+                </section>
+                <br><br>
+                <section id="no-results"> 
+                  <!-- No results found message -->
+                </section>
             </div>
             <div id="journal-entry">
-                <input type="text" id="user-topic" placeholder="Topic">
-                <button onclick="saveLibel()">Save</button>
-                <input type="text" id="user-libel" placeholder="Enter your libel-laced research here...">
+              <input type="text" id="user-topic" placeholder="Topic">
+              <button onclick="saveLibel()">Save</button>
+              <textarea id="user-libel" placeholder="Enter your libel-laced research here..."></textarea>
+              <div id="saved-data-container"></div>
             </div>
         </div>
     </main>

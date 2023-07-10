@@ -181,12 +181,33 @@ function searchNewsapi() {
   }
 
   // Link search button to news filters
-  var searchTerm = document.getElementById('search-term').value;
+  // Link search button to news filters
+  var searchTerm = $('#search-term').val();
+
   if (!searchTerm || searchTerm === null || searchTerm.trim() === "") {
     searchTerm = 'pokemon';
-    alert("NewsAPI requires the search field to be filled out. The \"All Categories\" selection queries from NewsAPI and thusly must contain a search term. If you wish to search without a search term, please select one of the specific categories. We have provided you with a Pokemon search in the meantime.");
+
+    var modal = $('#myModal');
+    var messageElement = $('#modal-message');
+
+    messageElement.text("NewsAPI requires the search field to be filled out. The \"All Categories\" selection queries from NewsAPI and thus must contain a search term. If you wish to search without a search term, please select one of the specific categories. We have provided you with a Pokemon search in the meantime.");
+
+    modal.dialog({
+      modal: true,
+      draggable: false,
+      resizable: false,
+      dialogClass: 'no-close',
+      buttons: [
+        {
+          text: "OK",
+          click: function() {
+            $(this).dialog("close");
+          }
+        }
+      ]
+    });
   } else {
-    searchTerm = document.getElementById('search-term').value;
+    searchTerm = $('#search-term').val();
   }
 
   var dropdown = document.getElementById("news-categories");
@@ -566,3 +587,95 @@ $(this).text($(this).attr("href"));
 }, function() {
 $(this).text("GitHub");
 });  
+
+function saveLibel() {
+  var topicInput = document.getElementById('user-topic');
+  var libelInput = document.getElementById('user-libel');
+
+  var topic = topicInput.value;
+  var libel = libelInput.value;
+
+  if (topic && libel) {
+    // Save data to local storage
+    localStorage.setItem(topic, libel);
+
+    // Clear input fields
+    topicInput.value = '';
+    libelInput.value = '';
+
+    // Update saved data display
+    updateSavedDataDisplay();
+  }
+}
+
+function saveLibel() {
+  var topicInput = document.getElementById('user-topic');
+  var libelInput = document.getElementById('user-libel');
+
+  var topic = topicInput.value;
+  var libel = libelInput.value;
+
+  if (topic && libel) {
+    // Save data to local storage
+    localStorage.setItem(topic, libel);
+
+    // Clear input fields
+    topicInput.value = '';
+    libelInput.value = '';
+
+    // Update saved data display
+    updateSavedDataDisplay();
+  }
+}
+
+function updateSavedDataDisplay() {
+  var savedDataContainer = document.getElementById('saved-data-container');
+  savedDataContainer.innerHTML = '';
+
+  // Iterate through local storage
+  for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
+    var value = localStorage.getItem(key);
+
+    // Create a wrapper div for each key-value pair
+    var pairContainer = document.createElement('div');
+    pairContainer.className = 'pair-container';
+
+    // Create a clickable element for each key
+    var keyElement = document.createElement('span');
+    keyElement.style.color = 'red';
+    keyElement.style.fontWeight = 'bold';
+    keyElement.style.cursor = 'pointer';
+    keyElement.textContent = key;
+    
+    keyElement.addEventListener('click', function(e) {
+      // Populate the clicked key and its value back into the input fields
+      var topicInput = document.getElementById('user-topic');
+      var libelInput = document.getElementById('user-libel');
+
+      topicInput.value = e.target.textContent;
+      libelInput.value = localStorage.getItem(e.target.textContent);
+    });
+
+    // Create a trash can icon
+    var trashIcon = document.createElement('i');
+    trashIcon.className = 'fas fa-trash-alt';
+    trashIcon.style.color = 'red';
+    trashIcon.style.marginLeft = '5px';
+    trashIcon.style.cursor = 'pointer';
+    trashIcon.addEventListener('click', function(e) {
+      var keyToRemove = e.target.parentNode.firstChild.textContent;
+      localStorage.removeItem(keyToRemove);
+      updateSavedDataDisplay();
+    });
+
+    // Append the key element and trash icon to the pair container
+    pairContainer.appendChild(keyElement);
+    pairContainer.appendChild(trashIcon);
+
+    // Append the pair container to the saved data container
+    savedDataContainer.appendChild(pairContainer);
+    savedDataContainer.appendChild(document.createTextNode(': ' + value));
+    savedDataContainer.appendChild(document.createElement('br'));
+  }
+}
